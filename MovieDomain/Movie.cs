@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Transactions;
 
 namespace MovieDomain
 {
@@ -10,5 +13,7 @@ namespace MovieDomain
         public string Description { get; set; }
 
         public DateTime ReleaseDate { get; set; }
+
+        public List<Show> Shows { get; set; }
     }
 }

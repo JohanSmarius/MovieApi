@@ -6,6 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Halcyon" Version="2.5.1" />
+    <PackageReference Include="Halcyon.Mvc" Version="2.5.1" />
+    <PackageReference Include="Halcyon.WebApi" Version="2.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>

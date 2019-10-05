@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Halcyon.HAL;
+using Halcyon.WebApi;
+using Halcyon;
+using Halcyon.Web.HAL;
 using Microsoft.AspNetCore.Mvc;
 using MovieDomain;
 using MovieDomainServices;
@@ -21,13 +25,13 @@ namespace DemoWebAPI.Controllers
 
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<Movie>> Get()
+        public IActionResult Get()
         {
             return Ok(_movieRepository.GetAllMovies());
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Movie> Get(int id)
+        public IActionResult Get(int id)
         {
             var movie = _movieRepository.GetMovie(id);
 
@@ -36,7 +40,23 @@ namespace DemoWebAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(movie);
+            return this.HAL(movie, new Link[] {
+                new Link("self", $"/api/movies/{id}"),
+                new Link("movies:shows", $"/api/movies/{id}/shows")
+            });
+        }
+
+        [HttpGet("{id}/shows")]
+        public IActionResult GetWithShows(int id)
+        {
+            var shows = _movieRepository.GetMovie(id)?.Shows;
+
+            if (shows == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(shows);
         }
 
         [HttpPost]

@@ -13,12 +13,14 @@ namespace MovieInfrastructure
             new Movie()
             {
                 Id = 1,
-                Name = "The Beginning"
+                Name = "The Beginning",
+                Shows = new List<Show> {new Show() { StartTime = DateTime.Now, Room = "Master"} }
             },
             new Movie()
             {
                 Id = 2,
-                Name = "The life of a developer"
+                Name = "The life of a developer",
+                Shows = new List<Show>() {new Show() { StartTime = DateTime.Now, Room = "Basement"} }
             }
         });
 
